@@ -1,0 +1,16 @@
+var mondamin_loc = {
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "descrip": "Hinton James Dorm" }, "geometry": { "type": "Point", "coordinates": [ -82.427113, 35.222737 ] } }
+]
+}
+
+
+var The_T_loc = {
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "descrip": "Hinton James Dorm" }, "geometry": { "type": "Point", "coordinates": [ -82.400238, 35.232045 ] } }
+]
+}

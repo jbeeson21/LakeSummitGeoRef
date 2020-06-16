@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lake Summit 1964 vs. Today</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+    
+    <script src = "./data/OldLakeSummitBridge.geojson"></script>
+    <script src = "./data/highway25.geojson"></script>
+    <script src = "./data/GreenCove.geojson"></script>
+    <script src = "./data/Mondamin.geojson"></script>
+   
+  
+   
+  
+    
+
+   <style type="text/css">
+      body {
+         margin: 0;
+         padding: 0;
+      }
+      html, body, #map{
+         width: 100%;
+         height: 100%;
+      }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+
+         var map = L.map('map').setView([35.22627, -82.41195], 15); //**THIS MIGHT BE WRONG TRY NEG**
+
+         var Land_Image = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        }).addTo(map);
+
+        var LakeSummit_1964 = L.tileLayer('file:///C%3A/Users/jbees/GEOG_370/LakeSummitGeoRef/{z}/{x}/{y}.png', {
+            minZoom: 12,
+            maxZoom: 18,
+            tms: false,
+            attribution: 'USGS'
+        }).addTo(map);
+
+
+        //var The_T_BOOL = "Here, a trestle crosses Lake Summit, near the dam. This spot, referred to as 'The T', is a place where counselors from Mondamin and Green Cove enjoy meeting for a nightime bool.<br/><img src='https://mail.google.com/mail/u/0/?ui=2&view=btop&ver=1nj101dboqm98#attid%253Datt_172b40ccb852fd45_0.1_355a35cf_c0a0a493_cb847098_d5732752_594eeff2%25252FIMG_3371.JPG'width='156px'/>";
+
+        var old_bridge = "An old, rusty, bridge still remains near the entrance to Green Cove. Though this birdge was used in 1964, a new bridge was constructed approximately 50 yards to the right of the old bridge. The section of Lake Road that the new bridge lies on is highlighted right under this marker.<br/><img src='https://bridgehunter.com/photos/28/32/283289-L.jpg'width='156px'/>";
+        var camp_mondamin = "Camp Mondamin (est. 1922) is an all boys summer camp that teaches boys from 6-17 years old valuable outdoor skills. I learned how to whitewater canoe and kayak as a camper here, and taught the same skill as a counselor for two summers. My grandfather and older brother both went to Mondamin, and I met some of my closest friends there, as well.<br/><img src='https://mccalldempsey.com/wp-content/uploads/2014/06/mondamin_2009-11.jpg'width='156px'/>";
+        var The_T_pic = "Here, a trestle crosses Lake Summit, near the dam. This spot, referred to as 'The T', is a place where counselors from Mondamin and Green Cove enjoy meeting for a nightime bool.<br/><img src='http://www.graspingforobjectivity.com/wp-content/uploads/2012/06/55_thumb.jpg'width='156px'/>";
+
+        //var The_T = L.marker([35.232045, -82.400238], {color: 'red'}).bindPopup(The_T_pic).openPopup();
+        //var Mondo = L.marker([35.222737, -82.427113]).bindPopup(camp_mondamin).openPopup();
+        //var GreenCove = L.marker([35.21739, -82.42733]).bindPopup("Camp Green Cove (est. 1948) is the sister camp to Mondamin and was founded by the sister to Mondamin's director, Frank Bell. My mother, aunt, and cousins attended Green Cove growing up. The camps share their property's amenities, which maximizes the resources available to the boys and girls.").openPopup();
+
+        //var changed_Bridge = L.marker([ 35.21975, -82.426875]).bindPopup(old_bridge).openPopup();
+        //var changed_highway = L.marker([35.23271, -82.42007]).bindPopup("Perhaps the biggest change in the area is the construction US Highway 25. In 1964, you can see where they were beginning to clear out trees for the highway. Highlighted next to this marker is the section of US Highway 25 that was constructed some time after 1964.").openPopup();
+        var development_around_lake = L.marker([35.222437, -82.414762]).bindPopup("The other significant change to Lake Summit is the residential development around the lake. When Frank Bell Sr. purchased the land for Mondamin, the land also included all that surrounds Lake Summit. However, since the century old purchase, much of the land has been sold off. Building footprints of current houses on Lake Summit are included on the layer from 1964 to show the extent of development on the lake. This marker is a good example of development changing Lake Summit's landscape.").openPopup();
+        
+        var bridge_icon = L.icon({
+            iconUrl: 'http://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-Picture.png',
+            iconSize: [40,40],
+            popupAnchor:[0,0]
+        });
+        var changed_Bridge = L.geoJSON(old_summit_bridge, { // a
+            pointToLayer: function (feature, latlng) { // b
+            return L.marker(latlng, {icon: bridge_icon});}}) // c
+            .bindPopup(old_bridge); //
+
+
+
+
+        var highway25_icon = L.icon({
+           iconUrl: 'http://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-Free-Download-PNG.png',
+           iconSize: [40,40],
+           popupAnchor:[0,0]
+        });
+        var changed_highway = L.geoJSON(highway_25, { // a
+            pointToLayer: function (feature, latlng) { // b
+            return L.marker(latlng, {icon: highway25_icon});}}) // c
+            .bindPopup("Perhaps the biggest change in the area is the construction US Highway 25. In 1964, you can see where they were beginning to clear out trees for the highway. Highlighted next to this marker is the section of US Highway 25 that was constructed some time after 1964."); 
+
+
+
+        var green_cove_icon = L.icon({
+           iconUrl: 'https://cdn.shopify.com/s/files/1/1713/9669/products/CampGreenCove_grande_b4542763-c57a-4d10-88c5-323d36461db4_grande.jpg?v=1518621909',
+           iconSize: [40,40],
+           popupAnchor:[0,0]
+        });
+        var GreenCove = L.geoJSON(green_cove_loc, { // a
+            pointToLayer: function (feature, latlng) { // b
+            return L.marker(latlng, {icon: green_cove_icon});}}) // c
+            .bindPopup("Camp Green Cove (est. 1948) is the sister camp to Mondamin and was founded by the sister to Mondamin's director, Frank Bell. My mother, aunt, and cousins attended Green Cove growing up. The camps share their property's amenities, which maximizes the resources available to the boys and girls."); 
+
+
+
+
+        var mondamin_icon = L.icon({
+           iconUrl: 'https://i.vimeocdn.com/portrait/15772044_640x640',
+           iconSize: [40,40],
+           popupAnchor:[0,0]
+        });
+        var Mondo = L.geoJSON(mondamin_loc, { // a
+            pointToLayer: function (feature, latlng) { // b
+            return L.marker(latlng, {icon: mondamin_icon});}}) // c
+            .bindPopup(camp_mondamin); 
+
+
+        var The_T_icon = L.icon({
+           iconUrl: 'https://cdn0.iconfinder.com/data/icons/ringtone-music-instruments/512/letter-t-latin-key-512.png',
+           iconSize: [40,40],
+           popupAnchor:[0,0]
+        });
+        var The_T = L.geoJSON(The_T_loc, { // a
+            pointToLayer: function (feature, latlng) { // b
+            return L.marker(latlng, {icon: The_T_icon});}}) // c
+            .bindPopup(The_T_pic); 
+
+
+
+
+
+
+        var Tiles = {
+       "Lake Summit (Current)": Land_Image,
+       "Lake Summit (1964)": LakeSummit_1964
+     }
+
+        var Vector = {
+            "The T": The_T,
+            "Camp Mondamin": Mondo,
+            "Camp Green Cove": GreenCove,
+            "Old Lake Road Bridge": changed_Bridge,
+            "US Highway 25": changed_highway,
+            "Lake Summit Development": development_around_lake
+        }
+
+        //var The_T_BOOL = "Bool<br/><img src='https://mail.google.com/mail/u/0/?ui=2&view=btop&ver=1nj101dboqm98#attid%253Datt_172b40ccb852fd45_0.1_355a35cf_c0a0a493_cb847098_d5732752_594eeff2%25252FIMG_3371.JPG'width='156px'/>";
+
+        L.control.layers(Vector, Tiles).addTo(map);
+        
+
+         //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(map)
+        // L.marker([35.63277778, -83.49083333]).addTo(map)
+
+
+    
+
+
+
+    </script>
+</body>
+</html>
