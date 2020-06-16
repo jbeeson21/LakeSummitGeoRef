@@ -40,15 +40,16 @@
 
          var map = L.map('map').setView([35.22627, -82.41195], 15); //**THIS MIGHT BE WRONG TRY NEG**
 
-         var Land_Image = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-        }).addTo(map);
-
+         
         var LakeSummit_1964 = L.tileLayer('file:///C%3A/Users/jbees/GEOG_370/LakeSummitGeoRef/{z}/{x}/{y}.png', {
             minZoom: 12,
             maxZoom: 18,
             tms: false,
             attribution: 'USGS'
+        }).addTo(map);
+        
+        var Land_Image = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         }).addTo(map);
 
 
